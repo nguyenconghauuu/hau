@@ -14,35 +14,31 @@
                     'smallText' => 'User list'
                 ])
 
+                <a href="{{route('admin.user.create')}}"><button class="btn btn-success mb-5">Add User</button></a>
+
                 <div class="card mb-4">
                     <div class="card-body">
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">First</th>
-                                    <th scope="col">Last</th>
-                                    <th scope="col">Handle</th>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($users as $user)
                                 <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
+                                    <td>{{$user->id}}</td>
+                                    <td>{{$user->name}}</td>
+                                    <td>{{$user->email}}</td>
+                                    <td>
+                                        <button class="btn btn-warning"><a href=""><i class="fa-solid fa-pen-to-square"></i></a></button>
+                                        <button class="btn btn-danger"><a href=""><i class="fa-solid fa-trash"></i></a></button>
+                                    </td>
                                 </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>@fat</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td colspan="2">Larry the Bird</td>
-                                    <td>@twitter</td>
-                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

@@ -33,7 +33,11 @@ Route::prefix('/')->middleware('auth')->group(function () {
         Route::get('/',function(){
             return redirect()->route('admin.index');
         });
-        Route::get('/user','AdminController@index')->name('index');
+        Route::prefix('user')->group(function(){
+            Route::get('','UserController@index')->name('user.index');
+            Route::get('/create','UserController@create')->name('user.create');
+            Route::post('/create','UserController@store')->name('user.store');
+        });
     });
 });
 
