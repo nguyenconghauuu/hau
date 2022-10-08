@@ -25,7 +25,15 @@ Route::middleware('have-login')->group(function () {
 });
 
 Route::prefix('/')->middleware('auth')->group(function () {
-    Route::get('index', 'Homecontroller@indexuserview')->name('user.index');
+    Route::middleware('role.user')->group(function(){
+        Route::get('index', 'Homecontroller@indexuserview')->name('user.index');
+    });
 
+    Route::prefix('admin')->name('admin.')->middleware('role.admin')->group(function(){
+        Route::get('/',function(){
+            return redirect()->route('admin.index');
+        });
+        Route::get('/user','AdminController@index')->name('index');
+    });
 });
 
