@@ -33,7 +33,7 @@
                                         </ul>
                                     </div>
                                     @endif
-                                    <form method="POST" action="{{router('login_account')}}">
+                                    <form method="POST" action="{{route('login_account')}}">
                                         @csrf
 
                                         <div class="form-floating mb-3">
@@ -51,7 +51,7 @@
                                     </form>
                                 </div>
                                 <div class="card-footer text-center py-3">
-                                    <div class="small"><a href="register.html">Need an account? Sign up!</a></div>
+                                    <div class="small"><a href="{{route('register')}}">Need an account? Sign up!</a></div>
                                 </div>
                             </div>
                         </div>
