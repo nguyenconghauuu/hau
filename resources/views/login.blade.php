@@ -27,10 +27,8 @@
                                 </div>
                                 <div class="card-body">
                                     @if (\Session::has('error'))
-                                    <div class="alert alert-error">
-                                        <ul>
-                                            <li>{!! \Session::get('error') !!}</li>
-                                        </ul>
+                                    <div class="alert alert-danger">
+                                        {!! \Session::get('error') !!}
                                     </div>
                                     @endif
                                     <form method="POST" action="{{route('login_account')}}">

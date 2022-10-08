@@ -26,24 +26,20 @@
                                 <div class="card-body">
                                     @if (\Session::has('success'))
                                         <div class="alert alert-success">
-                                            <ul>
-                                                <li>{!! \Session::get('success') !!}</li>
-                                            </ul>
+                                            {!! \Session::get('success') !!} <a href="{{route('login')}}" class="text">Login</a>
                                         </div>
                                     @endif
                                     @if (\Session::has('error'))
-                                        <div class="alert alert-error">
-                                            <ul>
-                                                <li>{!! \Session::get('error') !!}</li>
-                                            </ul>
+                                        <div class="alert alert-danger">
+                                            {!! \Session::get('error') !!}
                                         </div>
                                     @endif
-                                    <form method="POST" action="">
+                                    <form method="POST" action="{{route('register_account')}}">
                                         @csrf
 
                                         <div class="form-floating mb-3">
                                             <input class="form-control @error('username') is-invalid @enderror"
-                                                name="username" type="text" placeholder="Enter your username" />
+                                                name="username" type="text" placeholder="Enter your username" value="{{old('username')}}" />
                                             @error('username')
                                                 <div class="alert alert-danger  mt-1">{{ $message }}</div>
                                             @enderror
@@ -52,8 +48,8 @@
 
 
                                         <div class="form-floating mb-3">
-                                            <input class="form-control  @error('name') is-invalid @enderror"
-                                                name="name" type="text" placeholder="Enter your name" />
+                                            <input class="form-control @error('name') is-invalid @enderror"
+                                                name="name" type="text" placeholder="Enter your name" value="{{old('name')}}" />
                                             @error('name')
                                                 <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
@@ -61,7 +57,7 @@
                                         </div>
 
                                         <div class="form-floating mb-3">
-                                            <input class="form-control" name="email" type="email"
+                                            <input class="form-control" name="email" type="email" value="{{old('email')}}"
                                                 placeholder="name@example.com" />
                                             <label for="inputEmail">Email address</label>
                                         </div>
