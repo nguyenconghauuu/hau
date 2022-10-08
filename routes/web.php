@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +15,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
+});
+Route::prefix('/') ->group(function(){
+    Route::get('','Homecontroller@index')->name('index');
+    Route::get('login','LoginController@index')->name('login');
+    Route::post('login','LoginController@login')->name('login_account');
+    Route::get('index','Homecontroller@indexuserview')->name('user.index');
 });
