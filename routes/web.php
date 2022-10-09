@@ -37,6 +37,9 @@ Route::prefix('/')->middleware('auth')->group(function () {
             Route::get('','UserController@index')->name('user.index');
             Route::get('/create','UserController@create')->name('user.create');
             Route::post('/create','UserController@store')->name('user.store');
+            Route::get('/edit/{id}','UserController@show')->name('user.show');
+            Route::post('/edit/{id}','UserController@update')->name('user.update');
+            Route::get('/detete/{id}','UserController@destroy')->name('user.delete');
         });
     });
 });

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Http\Utils\AppUtils;
 use App\User;
 use Illuminate\Http\Request;
@@ -66,6 +67,9 @@ class UserController extends Controller
     public function show($id)
     {
         //
+        $user = User::find($id);
+        // dd($user);
+        return view('admin.user.edit',['user' => $user]);
     }
 
     /**
@@ -75,9 +79,20 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateUserRequest $request, $id)
     {
         //
+        try{
+            $user = User::find($id)->update([
+                'name' => $request->name,
+                'email' => $request->email,
+            ]);
+
+            return redirect()->route('admin.user.index');
+        }catch(\Exception $e){
+            Log::error($e->getMessage().$e->getTraceAsString());
+            return back()->with('error','Update user fail!')->withInput();
+       }
     }
 
     /**
@@ -89,5 +104,12 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+        try{
+            User::find($id)->delete();
+            return back();
+        }catch(\Exception $e){
+            Log::error($e->getMessage().$e->getTraceAsString());
+            return back()->with('error','Delete user fail!')->withInput();
+       }
     }
 }
