@@ -19,7 +19,7 @@ class UserRole
     {
         $user = Auth::user();
         if($user->role != AppUtils::ROLE_USER){
-            return redirect()->route('admin.index');
+            return redirect()->route('admin.user.index');
         }
 
         return $next($request);
